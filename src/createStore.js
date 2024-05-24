@@ -1,3 +1,4 @@
+//CREATE STORE FUNCTION
 export function createStore(reducer) {
   let state;
   let listeners = [];

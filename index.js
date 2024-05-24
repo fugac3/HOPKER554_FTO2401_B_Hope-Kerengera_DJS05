@@ -1,5 +1,6 @@
 import { createStore } from "./src/createStore.js";
 
+//types of actions that can be dispatched
 const ADD = "ADD";
 const SUBTRACT = "SUBTRACT";
 const RESET = "RESET";
@@ -9,7 +10,7 @@ const initialState = {
   value: 0,
 };
 
-//REDUCER function
+//REDUCER function //how the state will change based on actions applied
 function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD:
@@ -31,3 +32,20 @@ function reducer(state = initialState, action) {
       return state; //return the initial state
   }
 }
+
+//creating store using createStore function and reducer
+const store = createStore(reducer);
+
+//subscription written before dispatch so it can capture all state changes //logs current state to console every time action dispatched
+store.subscribe(() => {
+  console.log("Value: " + store.getState().value);
+});
+
+//dispatch actions
+
+store.dispatch({ type: ADD });
+store.dispatch({ type: ADD });
+store.dispatch({ type: SUBTRACT });
+store.dispatch({ type: RESET });
+
+console.log("Current state: " + store.getState().value);
